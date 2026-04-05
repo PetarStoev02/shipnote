@@ -25,7 +25,7 @@ Post saved to ~/.shipnote/posts.md
 Clone this repo and add it to your Claude Code plugins:
 
 ```bash
-git clone https://github.com/petstoev/shipnote.git ~/.claude/plugins/shipnote
+git clone https://github.com/PetarStoev02/shipnote.git ~/.claude/plugins/shipnote
 ```
 
 Or add the path in Claude Code settings under plugins.
