@@ -1,0 +1,11 @@
+{
+  "name": "shipnote",
+  "version": "1.0.0",
+  "description": "Turn your daily dev activity into build-in-public posts for Threads",
+  "author": {
+    "name": "Petar Stoev"
+  },
+  "repository": "https://github.com/petstoev/shipnote",
+  "license": "MIT",
+  "keywords": ["build-in-public", "threads", "social", "developer", "content"]
+}
