@@ -48,6 +48,18 @@ Options:
 - c) Custom
 If Threads was selected in Q4, default to 500. If X, default to 280. If both, default to 280.
 
+**Question 6 — Threads API (only if platform is "threads" or "both")**
+Ask: "Want to enable auto-posting to Threads? You'll need a Meta Developer App with Threads API access. If you don't have one yet, you can skip this and set it up later with /shipnote-setup."
+Options: a) Yes, I have my credentials ready, b) Skip for now
+
+If they choose (a), ask two follow-up questions:
+- "What's your Threads user ID? (numeric ID from the Meta Developer Portal)"
+- "What's your Threads access token? (long-lived token from the Meta Developer Portal)"
+
+Store these as `threadsUserId` and `threadsAccessToken` in config.
+
+If they choose (b), set both to `null` in config. They can re-run /shipnote-setup later.
+
 4. Save the config to `~/.shipnote/config.json`:
 
 ```json
@@ -56,7 +68,9 @@ If Threads was selected in Q4, default to 500. If X, default to 280. If both, de
   "postsPerRun": <selected number>,
   "reposPath": "<selected path>",
   "platform": "<selected platform>",
-  "maxLength": <selected length>
+  "maxLength": <selected length>,
+  "threadsUserId": "<user id or null>",
+  "threadsAccessToken": "<access token or null>"
 }
 ```
 

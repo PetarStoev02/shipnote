@@ -49,12 +49,33 @@ The first time you run `/shipnote`, it walks you through setup:
 
 Config saves to `~/.shipnote/config.json`. Reconfigure anytime with `/shipnote-setup`.
 
+## Auto-Post to Threads
+
+Shipnote can post directly to your Threads account. After generating a post, it asks "Ship it to Threads?" — confirm and it's live.
+
+### Setup (one-time, ~5 minutes)
+
+1. Go to [Meta Developer Portal](https://developers.facebook.com) and create a new app
+2. Select **"Other"** as the use case, then **"Business"** as the app type
+3. In your app dashboard, go to **Add Products** → find **Threads API** → click **Set Up**
+4. Go to **Threads API** → **Settings** and add your Threads account as a tester
+5. Open Threads, go to **Settings** → **Account** → **Website permissions** → accept the invite
+6. Back in the developer portal, go to **Threads API** → **Get Started**:
+   - Copy your **Threads User ID** (numeric)
+   - Click **Generate Token**, select your account, and copy the **Access Token**
+7. Run `/shipnote-setup` in Claude Code and enter your credentials when prompted
+
+Your credentials are stored locally in `~/.shipnote/config.json` and never leave your machine.
+
+> **Note:** Access tokens expire after 60 days. If posting starts failing, regenerate your token in the Meta Developer Portal and run `/shipnote-setup` again.
+
 ## How it works
 
 1. Scans all git repos in your configured path for commits since your last post
 2. Claude reads the activity and generates a human-sounding post
 3. Post prints to console and saves to `~/.shipnote/posts.md`
-4. Checkpoint updates so next run only covers new activity
+4. If Threads is configured, asks "Ship it?" — confirm to post directly
+5. Checkpoint updates so next run only covers new activity
 
 ## License
 

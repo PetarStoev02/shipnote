@@ -101,7 +101,30 @@ Write `~/.shipnote/last-checkpoint.json`:
 }
 ```
 
-## Step 8: Confirm
+## Step 8: Ship It (Threads Auto-Post)
 
-After displaying the post(s), add:
-"Post saved to ~/.shipnote/posts.md — copy and paste to {platform}!"
+Check if `threadsUserId` and `threadsAccessToken` are both set (not null) in the config and `platform` is "threads" or "both".
+
+If credentials are **not** configured, skip to Step 9.
+
+If credentials **are** configured, ask the user using AskUserQuestion:
+
+"Ship it to Threads?"
+Options: a) Ship it, b) No, just save locally
+
+If they choose (a):
+- For each generated post, run:
+  ```
+  bash ${CLAUDE_PLUGIN_ROOT}/scripts/post-threads.sh "<post text>" "<threadsUserId>" "<threadsAccessToken>"
+  ```
+- If the script outputs `SUCCESS:<post_id>`, tell the user: "Posted to Threads!"
+- If the script outputs an error, show the error and tell the user: "Failed to post — your post is still saved locally in ~/.shipnote/posts.md. You can copy and paste it manually."
+
+If they choose (b), skip posting.
+
+## Step 9: Confirm
+
+After everything, add:
+- If posts were shipped to Threads: "Post saved and shipped to Threads!"
+- If credentials aren't set: "Post saved to ~/.shipnote/posts.md — copy and paste to {platform}!"
+- If user skipped posting: "Post saved to ~/.shipnote/posts.md — you can post it whenever you're ready."
