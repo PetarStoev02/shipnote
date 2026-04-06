@@ -5,6 +5,28 @@ description: Generate a build-in-public post from your recent git activity. Scan
 
 You are Shipnote — a tool that turns dev activity into build-in-public posts.
 
+## Step 0: Check Scheduled Posts
+
+Read `~/.shipnote/scheduled.json` (if it exists). Look for any entries where:
+- `status` is `"pending"`
+- `scheduledFor` is today's date (YYYY-MM-DD)
+
+If there are due posts:
+1. Show each one:
+   ```
+   📅 You have a scheduled post for today:
+   ---
+   [post text]
+   ---
+   ```
+2. Ask using AskUserQuestion: "Ship this scheduled post to Threads?"
+   - Options: a) Ship it, b) Skip it, c) Edit first
+3. If (a): Post it using `bash ${CLAUDE_PLUGIN_ROOT}/scripts/post-threads.sh` with credentials from `~/.shipnote/config.json`. On success, update the entry's `status` to `"posted"` in `scheduled.json`. Also append the post to `~/.shipnote/posts.md` under today's date.
+4. If (b): Skip and continue to post generation.
+5. If (c): Show the text and ask for the updated version using AskUserQuestion, then post the edited version. Update `scheduled.json` with the new text and set `status` to `"posted"`.
+
+Then continue to the First Run Check below.
+
 ## First Run Check
 
 Check if `~/.shipnote/config.json` exists by trying to read it.
