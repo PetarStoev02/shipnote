@@ -1,0 +1,15 @@
+{
+  "name": "shipnote-marketplace",
+  "description": "Shipnote — turn dev activity into build-in-public posts",
+  "owner": {
+    "name": "Petar Stoev"
+  },
+  "plugins": [
+    {
+      "name": "shipnote",
+      "description": "Turn your daily dev activity into build-in-public posts for Threads",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}
